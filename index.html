@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Melbourne</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Glass morphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        /* Header */
+        header {
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem auto;
+            max-width: 1200px;
+        }
+
+        header .glass {
+            padding: 3rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        nav {
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+
+        nav .glass {
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Section */
+        section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 250px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.5);
+        }
+
+        .card-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.2;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover .card-bg {
+            opacity: 0.3;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .card p {
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        /* Icon styles */
+        .icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Feature section with large image */
+        .feature-section {
+            margin: 4rem 0;
+        }
+
+        .feature-glass {
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .feature-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.25;
+            z-index: -1;
+        }
+
+        .feature-content {
+            max-width: 700px;
+            z-index: 1;
+        }
+
+        .feature-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        /* Day trips section */
+        .trip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .trip-card {
+            padding: 2rem 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 200px;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 4rem;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        footer .glass {
+            padding: 2rem;
+        }
+
+        /* Placeholder image styling */
+        .placeholder {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav .glass {
+                flex-direction: column;
+            }
+
+            nav a {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="glass">
+            <!-- Replace this div with: <img src="your-melbourne-skyline.jpg" alt="Melbourne" class="hero-bg"> -->
+            <div class="hero-bg placeholder">HERO BACKGROUND IMAGE<br>Melbourne Skyline</div>
+            <h1>🇦🇺 Discover Melbourne</h1>
+            <p class="subtitle">Australia's Cultural Capital</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="glass">
+            <a href="#explore">Explore</a>
+            <a href="#arts">Arts & Culture</a>
+            <a href="#nature">Parks & Nature</a>
+            <a href="#food">Food & Coffee</a>
+            <a href="#sports">Sports</a>
+            <a href="#daytrips">Day Trips</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Explore the City -->
+        <section id="explore">
+            <h2 class="section-title">🏙️ Explore the City</h2>
+            <div class="card-grid">
+                <div class="card glass">
+                    <!-- Replace with: <img src="federation-square.jpg" alt="Federation Square" class="card-bg"> -->
+                    <div class="card-bg placeholder">Federation Square Image</div>
+                    <h3>Federation Square</h3>
+                    <p>The heart of Melbourne, surrounded by museums, cafes, and cultural events. A vibrant hub where locals and visitors gather.</p>
+                </div>
+                <div class="card glass">
+                    <!-- Replace with: <img src="flinders-station.jpg" alt="Flinders Street" class="card-bg"> -->
+                    <div class="card-bg placeholder">Flinders Street Station Image</div>
+                    <h3>Flinders Street Station</h3>
+                    <p>An iconic landmark and perfect for people-watching. One of Melbourne's most recognizable buildings.</p>
+                </div>
+                <div class="card glass">
+                    <!-- Replace with: <img src="southbank.jpg" alt="Southbank" class="card-bg"> -->
+                    <div class="card-bg placeholder">Southbank Promenade Image</div>
+                    <h3>Southbank Promenade</h3>
+                    <p>Great for riverside walks, restaurants, and the Melbourne Arts Centre. Stunning views day and night.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Arts and Culture -->
+        <section id="arts">
+            <h2 class="section-title">🎨 Arts and Culture</h2>
+            <div class="card-grid">
+                <div class="card glass">
+                    <!-- Replace with: <img src="ngv.jpg" alt="NGV" class="card-bg"> -->
+                    <div class="card-bg placeholder">NGV Gallery Image</div>
+                    <h3>National Gallery of Victoria (NGV)</h3>
+                    <p>Australia's oldest and most visited art museum. Home to an incredible collection spanning ancient to contemporary art.</p>
+                </div>
+                <div class="card glass">
+                    <!-- Replace with: <img src="acmi.jpg" alt="ACMI" class="card-bg"> -->
+                    <div class="card-bg placeholder">ACMI Image</div>
+                    <h3>ACMI</h3>
+                    <p>Australian Centre for the Moving Image – A fascinating place for film, TV, and digital art lovers.</p>
+                </div>
+                <div class="card glass">
+                    <!-- Replace with: <img src="hosier-lane.jpg" alt="Street Art" class="card-bg"> -->
+                    <div class="card-bg placeholder">Hosier Lane Street Art Image</div>
+                    <h3>Street Art in Hosier Lane</h3>
+                    <p>Famous for colourful murals and graffiti art. An ever-changing canvas showcasing Melbourne's creative spirit.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Section -->
+        <div class="feature-section">
+            <div class="feature-glass glass">
+                <!-- Replace with: <img src="melbourne-feature.jpg" alt="Melbourne" class="feature-bg"> -->
+                <div class="feature-bg placeholder">Large Feature Background Image</div>
+                <div class="feature-content">
+                    <h2>Experience Melbourne's Unique Charm</h2>
+                    <p>From hidden laneways filled with street art to world-class sporting events, Melbourne offers something for everyone. Discover why this vibrant city is consistently ranked among the world's most liveable cities.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Parks and Nature -->
+        <section id="nature">
+            <h2 class="section-title">🌳 Parks and Nature</h2>
+            <div class="card-grid">
+                <div class="card glass">
+                    <!-- Replace with: <img src="botanic-gardens.jpg" alt="Botanic Gardens" class="card-bg"> -->
+                    <div class="card-bg placeholder">Royal Botanic Gardens Image</div>
+                    <h3>Royal Botanic Gardens</h3>
+                    <p>A peaceful place for walking, picnics, and beautiful views of the city. Escape the urban hustle in nature's embrace.</p>
+                </div>
+                <div class="card glass">
+                    <!-- Replace with: <img src="yarra-river.jpg" alt="Yarra River" class="card-bg"> -->
+                    <div class="card-bg placeholder">Yarra River Image</div>
+                    <h3>Yarra River Walks</h3>
+                    <p>Enjoy cycling or jogging along the scenic Yarra. The river forms the natural heart of the city.</p>
+                </div>
+                <div class="card glass">
+                    <!-- Replace with: <img src="st-kilda-beach.jpg" alt="St Kilda" class="card-bg"> -->
+                    <div class="card-bg placeholder">St Kilda Beach Image</div>
+                    <h3>St Kilda Beach</h3>
+                    <p>Relax by the water, spot penguins at the pier, and enjoy sunset views. Melbourne's most famous beach suburb.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Food and Coffee Culture -->
+        <section id="food">
+            <h2 class="section-title">☕ Food and Coffee Culture</h2>
+            <div class="card-grid">
+                <div class="card glass">
+                    <!-- Replace with: <img src="laneway-cafes.jpg" alt="Cafes" class="card-bg"> -->
+                    <div class="card-bg placeholder">Degraves Street Cafe Image</div>
+                    <h3>Degraves Street & Hardware Lane</h3>
+                    <p>Known for Melbourne's famous coffee and laneway cafes. Experience the city's renowned coffee culture.</p>
+                </div>
+                <div class="card glass">
+                    <!-- Replace with: <img src="queen-vic-market.jpg" alt="Market" class="card-bg"> -->
+                    <div class="card-bg placeholder">Queen Victoria Market Image</div>
+                    <h3>Queen Victoria Market</h3>
+                    <p>A huge market for fresh produce, souvenirs, and local food. A Melbourne institution since 1878.</p>
+                </div>
+                <div class="card glass">
+                    <!-- Replace with: <img src="brunswick-fitzroy.jpg" alt="Brunswick" class="card-bg"> -->
+                    <div class="card-bg placeholder">Brunswick/Fitzroy Image</div>
+                    <h3>Brunswick and Fitzroy</h3>
+                    <p>Trendy suburbs with vintage shops, live music, and great dining spots. Melbourne's hipster heartland.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sports and Entertainment -->
+        <section id="sports">
+            <h2 class="section-title">⚽ Sports and Entertainment</h2>
+            <div class="card-grid">
+                <div class="card glass">
+                    <!-- Replace with: <img src="mcg.jpg" alt="MCG" class="card-bg"> -->
+                    <div class="card-bg placeholder">MCG Stadium Image</div>
+                    <h3>Melbourne Cricket Ground (MCG)</h3>
+                    <p>Watch AFL, cricket, or concerts at one of the world's best stadiums. The 'G is a sporting cathedral.</p>
+                </div>
+                <div class="card glass">
+                    <!-- Replace with: <img src="rod-laver.jpg" alt="Rod Laver" class="card-bg"> -->
+                    <div class="card-bg placeholder">Rod Laver Arena Image</div>
+                    <h3>Rod Laver Arena</h3>
+                    <p>Home of the Australian Open tennis tournament. World-class tennis and entertainment venue.</p>
+                </div>
+                <div class="card glass">
+                    <!-- Replace with: <img src="marvel-stadium.jpg" alt="Marvel Stadium" class="card-bg"> -->
+                    <div class="card-bg placeholder">Marvel Stadium Image</div>
+                    <h3>Marvel Stadium</h3>
+                    <p>Catch live sports or major events. Melbourne's premier indoor stadium with a retractable roof.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Day Trips -->
+        <section id="daytrips">
+            <h2 class="section-title">🚇 Day Trips from Melbourne</h2>
+            <div class="trip-grid">
+                <div class="trip-card glass">
+                    <!-- Replace with: <img src="great-ocean-road.jpg" alt="Great Ocean Road" class="card-bg"> -->
+                    <div class="card-bg placeholder">Great Ocean Road Image</div>
+                    <span class="icon">🌊</span>
+                    <h3>Great Ocean Road</h3>
+                    <p>One of the world's most scenic coastal drives.</p>
+                </div>
+                <div class="trip-card glass">
+                    <!-- Replace with: <img src="phillip-island.jpg" alt="Phillip Island" class="card-bg"> -->
+                    <div class="card-bg placeholder">Phillip Island Image</div>
+                    <span class="icon">🐧</span>
+                    <h3>Phillip Island</h3>
+                    <p>See the famous Penguin Parade at sunset.</p>
+                </div>
+                <div class="trip-card glass">
+                    <!-- Replace with: <img src="yarra-valley.jpg" alt="Yarra Valley" class="card-bg"> -->
+                    <div class="card-bg placeholder">Yarra Valley Winery Image</div>
+                    <span class="icon">🍷</span>
+                    <h3>Yarra Valley</h3>
+                    <p>Explore wineries and local food.</p>
+                </div>
+                <div class="trip-card glass">
+                    <!-- Replace with: <img src="dandenong-ranges.jpg" alt="Dandenong" class="card-bg"> -->
+                    <div class="card-bg placeholder">Dandenong Ranges Image</div>
+                    <span class="icon">🌲</span>
+                    <h3>Dandenong Ranges</h3>
+                    <p>Visit gardens, forests, and charming villages.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="glass">
+            <p>&copy; 2025 Discover Melbourne. Plan your perfect Melbourne adventure.</p>
+            <p style="margin-top: 1rem; opacity: 0.8;">🇦🇺 Made with love for Australia's cultural capital</p>
+        </div>
+    </footer>
+</body>
+</html>
